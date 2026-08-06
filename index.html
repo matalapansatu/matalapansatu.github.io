@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mata81 — MLBB & eFootball</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1210;
+    --paper:#EDEAE1;
+    --gold:#C9A24B;
+    --pitch:#2F6B4F;
+    --pitch-deep:#1B3D2C;
+    --signal:#E4572E;
+    --mist:#8E9A93;
+    --line: rgba(237,234,225,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(14,18,16,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1180px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Big Shoulders Display', sans-serif; font-weight:800; font-size:22px; letter-spacing:0.02em;}
+  .brand .mark{width:26px; height:26px;}
+  nav ul{display:flex; gap:34px; list-style:none;}
+  nav a{font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--mist); transition:color 0.2s;}
+  nav a:hover{color:var(--gold);}
+  nav .toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:80px;
+  }
+  .hero-split{
+    position:absolute; inset:0; z-index:0; display:flex;
+  }
+  .half{width:50%; height:100%; position:relative; overflow:hidden;}
+  .half.moba{
+    background:
+      radial-gradient(circle at 30% 40%, rgba(228,87,46,0.16), transparent 55%),
+      repeating-linear-gradient(60deg, rgba(237,234,225,0.035) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(-60deg, rgba(237,234,225,0.035) 0 1px, transparent 1px 46px),
+      var(--ink);
+  }
+  .half.football{
+    background:
+      radial-gradient(circle at 70% 60%, rgba(201,162,75,0.14), transparent 55%),
+      var(--pitch-deep);
+  }
+  .half.football::before{
+    content:'';
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(180deg, rgba(237,234,225,0.05) 0 2px, transparent 2px 64px);
+  }
+  .half.football::after{
+    content:'';
+    position:absolute; right:-140px; top:50%; transform:translateY(-50%);
+    width:420px; height:420px; border-radius:50%;
+    border:1.5px solid rgba(237,234,225,0.12);
+  }
+  .seam{
+    position:absolute; top:0; bottom:0; left:50%; width:1px;
+    background:linear-gradient(180deg, transparent, var(--gold), transparent);
+    z-index:2;
+  }
+  .hero-inner{
+    position:relative; z-index:3; width:100%;
+    text-align:center;
+  }
+  .eyemark{
+    width:96px; height:96px; margin:0 auto 28px;
+    animation: blink 6s ease-in-out infinite;
+  }
+  @keyframes blink{
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.08); }
+  }
+  .eyemark svg{width:100%; height:100%;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px;
+  }
+  h1.title{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:clamp(64px, 12vw, 148px);
+    line-height:0.88;
+    letter-spacing:-0.01em;
+  }
+  .title .lock{color:var(--gold);}
+  .tagline{
+    max-width:520px; margin:26px auto 0;
+    color:var(--mist); font-size:16px; line-height:1.6;
+  }
+  .hero-games{
+    margin-top:38px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+  }
+  .pill{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em;
+    padding:9px 18px; border:1px solid var(--line); border-radius:999px;
+    color:var(--paper); display:flex; align-items:center; gap:8px;
+  }
+  .pill span.dot{width:6px; height:6px; border-radius:50%; background:var(--signal);}
+  .pill.b span.dot{background:var(--pitch);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 0; position:relative;}
+  .eyebrow-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px;
+  }
+  .eyebrow-label::after{content:''; flex:1; height:1px; background:var(--line);}
+  h2{
+    font-family:'Big Shoulders Display', sans-serif; font-weight:800;
+    font-size:clamp(34px, 5vw, 52px); line-height:1; margin-bottom:22px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; align-items:start;}
+  .about-text p{color:var(--mist); font-size:16px; line-height:1.75; margin-bottom:18px; max-width:52ch;}
+  .stat-block{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .stat{background:var(--ink); padding:26px 22px;}
+  .stat .n{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:30px; color:var(--gold);}
+  .stat .l{font-size:12px; color:var(--mist); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;}
+
+  /* ---------- ROSTER ---------- */
+  .tabs{display:flex; gap:8px; margin-bottom:40px;}
+  .tab-btn{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:11px 22px; border:1px solid var(--line); background:transparent; color:var(--mist);
+    cursor:pointer; transition:all 0.2s;
+  }
+  .tab-btn.active{color:var(--ink); background:var(--gold); border-color:var(--gold);}
+  .roster-panel{display:none;}
+  .roster-panel.active{display:block; animation:fade 0.35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  .roster-list{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .player{background:var(--ink); padding:26px 22px; transition:background 0.2s;}
+  .player:hover{background:rgba(201,162,75,0.06);}
+  .player .num{font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:13px; margin-bottom:10px;}
+  .player .name{font-family:'Big Shoulders Display', sans-serif; font-weight:700; font-size:24px; margin-bottom:4px;}
+  .player .role{font-size:12px; color:var(--mist); text-transform:uppercase; letter-spacing:0.06em;}
+
+  /* ---------- RESULTS ---------- */
+  .ticker-note{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--mist); margin-bottom:24px; letter-spacing:0.05em;}
+  .match-row{
+    display:grid; grid-template-columns:90px 1fr 90px 140px; align-items:center;
+    gap:18px; padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .match-row:first-of-type{border-top:1px solid var(--line);}
+  .match-row .date{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mist);}
+  .match-row .teams{font-family:'Big Shoulders Display', sans-serif; font-weight:700; font-size:20px;}
+  .match-row .teams .vs{color:var(--mist); font-weight:600; font-size:14px; margin:0 8px;}
+  .match-row .score{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:18px; color:var(--gold); text-align:right;}
+  .match-row .result{font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; text-align:right;}
+  .result.win{color:var(--pitch);}
+  .result.win::before{content:'W · ';}
+  .result.loss{color:var(--signal);}
+  .result.loss::before{content:'L · ';}
+
+  /* ---------- JOIN / CONTACT ---------- */
+  .join{
+    background:var(--pitch-deep); border:1px solid var(--line);
+    padding:60px 50px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:50px; align-items:center;
+  }
+  .join h2{font-size:clamp(28px,4vw,40px);}
+  .join p{color:var(--mist); max-width:44ch; line-height:1.7;}
+  .social-links{display:flex; flex-direction:column; gap:2px;}
+  .social-links a{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--paper); transition:color 0.2s;
+  }
+  .social-links a:hover{color:var(--gold);}
+  .social-links a span{color:var(--mist); font-size:11px;}
+
+  footer{padding:40px 0; border-top:1px solid var(--line);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  footer .fmark{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--mist); letter-spacing:0.05em;}
+
+  @media (max-width: 860px){
+    nav ul{display:none;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .join{grid-template-columns:1fr; padding:40px 28px;}
+    .match-row{grid-template-columns:70px 1fr 70px; }
+    .match-row .result{display:none;}
+    h1.title{font-size:clamp(48px, 16vw, 90px);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 20C2 20 10 8 20 8C30 8 38 20 38 20C38 20 30 32 20 32C10 32 2 20 2 20Z" stroke="#C9A24B" stroke-width="2"/>
+        <circle cx="20" cy="20" r="6" fill="#C9A24B"/>
+      </svg>
+      MATA81
+    </div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#roster">Roster</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#join">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-split">
+    <div class="half moba"></div>
+    <div class="half football"></div>
+  </div>
+  <div class="seam"></div>
+  <div class="wrap hero-inner">
+    <div class="eyemark">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 50C5 50 25 20 50 20C75 20 95 50 95 50C95 50 75 80 50 80C25 80 5 50 5 50Z" stroke="#C9A24B" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="16" fill="#C9A24B"/>
+        <circle cx="50" cy="50" r="6" fill="#0E1210"/>
+      </svg>
+    </div>
+    <div class="eyebrow">Est. 2081 · Two Games, One Vision</div>
+    <h1 class="title">MATA<span class="lock">81</span></h1>
+    <p class="tagline">A competitive esports team built across two arenas — the lane and the pitch. Same discipline, same eye for the game.</p>
+    <div class="hero-games">
+      <div class="pill"><span class="dot"></span>Mobile Legends: Bang Bang</div>
+      <div class="pill b"><span class="dot"></span>eFootball</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="eyebrow-label">Who we are</div>
+      <h2>Built on vision,<br>not just reflexes.</h2>
+      <p>Mata81 fields squads across Mobile Legends: Bang Bang and eFootball — two very different games that reward the same thing: reading the field before the opponent does. "Mata" means eye. It's the name and the standard.</p>
+      <p>We compete in local tournaments, scrim regularly, and are always scouting for players who see the game one step ahead.</p>
+    </div>
+    <div class="stat-block">
+      <div class="stat"><div class="n">02</div><div class="l">Active Rosters</div></div>
+      <div class="stat"><div class="n">5.0</div><div class="l">Club Rating</div></div>
+      <div class="stat"><div class="n">01</div><div class="l">Vision</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l">Grind</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="roster">
+  <div class="wrap">
+    <div class="eyebrow-label">The squads</div>
+    <h2 style="margin-bottom:34px;">Roster</h2>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="mlbb">MLBB</button>
+      <button class="tab-btn" data-tab="efootball">eFootball</button>
+    </div>
+
+    <div class="roster-panel active" id="mlbb">
+      <div class="roster-list">
+        <div class="player"><div class="num">01</div><div class="name">Player Name</div><div class="role">Gold Laner</div></div>
+        <div class="player"><div class="num">02</div><div class="name">Player Name</div><div class="role">Exp Laner</div></div>
+        <div class="player"><div class="num">03</div><div class="name">Player Name</div><div class="role">Mid Laner</div></div>
+        <div class="player"><div class="num">04</div><div class="name">Player Name</div><div class="role">Jungler</div></div>
+        <div class="player"><div class="num">05</div><div class="name">Player Name</div><div class="role">Roamer</div></div>
+      </div>
+    </div>
+
+    <div class="roster-panel" id="efootball">
+      <div class="roster-list">
+        <div class="player"><div class="num">01</div><div class="name">Player Name</div><div class="role">Starting XI</div></div>
+        <div class="player"><div class="num">02</div><div class="name">Player Name</div><div class="role">Starting XI</div></div>
+        <div class="player"><div class="num">03</div><div class="name">Player Name</div><div class="role">Substitute</div></div>
+        <div class="player"><div class="num">04</div><div class="name">Player Name</div><div class="role">Team Captain</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="eyebrow-label">Scoreboard</div>
+    <h2>Recent results</h2>
+    <div class="ticker-note">/// SAMPLE DATA — replace with real match history</div>
+
+    <div class="match-row">
+      <div class="date">03 AUG</div>
+      <div class="teams">MATA81 <span class="vs">vs</span> Rival Esports</div>
+      <div class="score">2 – 1</div>
+      <div class="result win">Win</div>
+    </div>
+    <div class="match-row">
+      <div class="date">28 JUL</div>
+      <div class="teams">MATA81 <span class="vs">vs</span> Squad Nine</div>
+      <div class="score">1 – 2</div>
+      <div class="result loss">Loss</div>
+    </div>
+    <div class="match-row">
+      <div class="date">21 JUL</div>
+      <div class="teams">MATA81 <span class="vs">vs</span> Iron Circuit</div>
+      <div class="score">3 – 0</div>
+      <div class="result win">Win</div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <div class="join">
+      <div>
+        <div class="eyebrow-label" style="margin-bottom:14px;">Get in touch</div>
+        <h2>Scrim requests, tournament invites, or trials — reach out.</h2>
+        <p style="margin-top:14px;">We're always open to competitive scrims and scouting sharp players for both rosters.</p>
+      </div>
+      <div class="social-links">
+        <a href="#">Instagram <span>@mata81</span></a>
+        <a href="#">Discord <span>Join server</span></a>
+        <a href="#">Email <span>team@mata81.gg</span></a>
+        <a href="https://maps.app.goo.gl/dSEPQp3PWEe7ZRoQ8">Google Maps <span>View listing</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fmark">MATA81 — TWO GAMES, ONE VISION</div>
+    <div class="fmark">© 2026 MATA81</div>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.roster-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
