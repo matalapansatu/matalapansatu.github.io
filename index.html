@@ -191,17 +191,10 @@
   .result.loss::before{content:'L · ';}
 
   .gallery{
-    display:grid; grid-template-columns:1fr 1.4fr; gap:1px;
-    background:var(--line); border:1px solid var(--line);
+    background:var(--ink); border:1px solid var(--line);
+    display:flex; justify-content:center; padding:24px;
   }
-  .gallery figure{background:var(--ink); margin:0; overflow:hidden;}
-  .gallery img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;}
-  .gallery figure:hover img{transform:scale(1.03);}
-  .gallery figcaption{
-    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--mist); padding:14px 4px 0;
-  }
-  .gallery .cap-wrap{padding:0 0 16px;}
+  .gallery img{max-width:100%; height:auto; display:block;}
 
   .join{
     background:var(--navy); border:1px solid var(--line);
@@ -282,7 +275,7 @@
     </div>
     <div class="eyebrow">Est. 2026 · Two Games, One Vision</div>
     <h1 class="title">MATA<span class="lock">81</span></h1>
-    <p class="tagline">Bukan pahlawan, cuma melawan.</p>
+    <p class="tagline">Bukan pahlawan, Cuma melawan.</p>
     <div class="motto">Stoic · Marcus · Meditasi</div>
     <div class="hero-games">
       <div class="pill"><span class="dot"></span>Mobile Legends: Bang Bang</div>
@@ -297,7 +290,7 @@
       <div class="eyebrow-label">Who we are</div>
       <h2>Built on vision,<br>not just reflexes.</h2>
       <p>Mata81 fields squads across Mobile Legends: Bang Bang and eFootball — two very different games that reward the same thing: reading the field before the opponent does. "Mata" means eye. It's the name and the standard.</p>
-      <p>Bukan pahlawan, cuma melawan — we're not here for glory, just to compete, every match, every season.</p>
+      <p>Bukan pahlawan, Cuma melawan — we're not here for glory, just to compete, every match, every season.</p>
     </div>
     <div class="stat-block">
       <div class="stat"><div class="n">02</div><div class="l">Active Rosters</div></div>
@@ -373,12 +366,7 @@
     <div class="eyebrow-label">On the pitch, off the lane</div>
     <h2 style="margin-bottom:34px;">The squad</h2>
     <div class="gallery">
-      <figure>
-        <img src="jersey.png" alt="Mata81 official jersey — front, back, and side view">
-      </figure>
-      <figure>
-        <img src="team-photo.png" alt="Mata81 members wearing the official jersey">
-      </figure>
+      <img src="jersey.png" alt="Mata81 official jersey — front, back, and side view">
     </div>
   </div>
 </section>
