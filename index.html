@@ -160,19 +160,18 @@
   .roster-panel{display:none;}
   .roster-panel.active{display:block; animation:fade 0.35s ease;}
   @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
-  .roster-list{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .roster-list{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
   .player{background:var(--ink); padding:26px 22px; transition:background 0.2s;}
   .player:hover{background:rgba(63,233,227,0.05);}
-  .avatar{width:64px; height:64px; border-radius:50%; overflow:hidden; margin-bottom:16px; border:1px solid var(--line); position:relative;}
+  .avatar{width:100%; height:240px; border-radius:8px; overflow:hidden; margin-bottom:16px; border:1px solid var(--line); position:relative;}
   .avatar img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block;}
   .avatar .fallback{
     position:absolute; inset:0; display:none; align-items:center; justify-content:center;
     background:var(--navy); color:var(--cyan);
-    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:20px;
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:40px;
   }
   .player .num{font-family:'JetBrains Mono', monospace; color:var(--cyan); font-size:13px; margin-bottom:10px;}
-  .player .name{font-family:'Big Shoulders Display', sans-serif; font-weight:700; font-size:24px; margin-bottom:6px;}
-  .player .ign{font-size:12px; color:var(--silver); margin-bottom:4px;}
+  .player .ign{font-family:'Big Shoulders Display', sans-serif; font-weight:700; font-size:24px; color:var(--paper); margin-bottom:4px;}
   .player .role{font-size:12px; color:var(--mist); text-transform:uppercase; letter-spacing:0.05em;}
 
   .ticker-note{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--mist); margin-bottom:24px; letter-spacing:0.05em;}
@@ -283,7 +282,7 @@
     </div>
     <div class="eyebrow">Est. 2026 · Two Games, One Vision</div>
     <h1 class="title">MATA<span class="lock">81</span></h1>
-    <p class="tagline">Bukan pahlawan, cuma melawan.</p>
+    <p class="tagline">Bukan pahlwan, cuma melawan.</p>
     <div class="motto">Stoic · Marcus · Meditasi</div>
     <div class="hero-games">
       <div class="pill"><span class="dot"></span>Mobile Legends: Bang Bang</div>
@@ -298,7 +297,7 @@
       <div class="eyebrow-label">Who we are</div>
       <h2>Built on vision,<br>not just reflexes.</h2>
       <p>Mata81 fields squads across Mobile Legends: Bang Bang and eFootball — two very different games that reward the same thing: reading the field before the opponent does. "Mata" means eye. It's the name and the standard.</p>
-      <p>Bukan pahlawan, cuma melawan — we're not here for glory, just to compete, every match, every tournament.</p>
+      <p>Bukan pahlwan, cuma melawan — we're not here for glory, just to compete, every match, every season.</p>
     </div>
     <div class="stat-block">
       <div class="stat"><div class="n">02</div><div class="l">Active Rosters</div></div>
@@ -320,23 +319,23 @@
 
     <div class="roster-panel active" id="mlbb">
       <div class="roster-list">
-        <div class="player"><div class="avatar"><img src="waez.png" alt="Waez" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">W</div></div><div class="num">01</div><div class="name">Waez</div><div class="ign">Tea Rawls</div><div class="role">Gold Laner</div></div>
-        <div class="player"><div class="avatar"><img src="muaz.png" alt="Muaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">02</div><div class="name">Muaz</div><div class="ign">sultanbrawl</div><div class="role">Exp Laner</div></div>
-        <div class="player"><div class="avatar"><img src="muiz.png" alt="Muiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">03</div><div class="name">Muiz</div><div class="ign">Super IyZx</div><div class="role">Jungler</div></div>
-        <div class="player"><div class="avatar"><img src="haziq.png" alt="Haziq" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">04</div><div class="name">Haziq</div><div class="ign">SuperZiqZx</div><div class="role">Gold Laner</div></div>
-        <div class="player"><div class="avatar"><img src="hakim.png" alt="Hakim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">05</div><div class="name">Hakim</div><div class="ign">Super Braderr</div><div class="role">Roamer</div></div>
-        <div class="player"><div class="avatar"><img src="faiz.png" alt="Faiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">F</div></div><div class="num">SUB</div><div class="name">Faiz</div><div class="ign">MataKilau</div><div class="role">Exp Laner</div></div>
+        <div class="player"><div class="avatar"><img src="waez.png" alt="Waez" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">W</div></div><div class="num">01</div><div class="ign">Tea Rawls</div><div class="role">Gold Laner</div></div>
+        <div class="player"><div class="avatar"><img src="muaz.png" alt="Muaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">02</div><div class="ign">sultanbrawl</div><div class="role">Exp Laner</div></div>
+        <div class="player"><div class="avatar"><img src="muiz.png" alt="Muiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">03</div><div class="ign">Super IyZx</div><div class="role">Jungler</div></div>
+        <div class="player"><div class="avatar"><img src="haziq.png" alt="Haziq" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">04</div><div class="ign">SuperZiqZx</div><div class="role">Gold Laner</div></div>
+        <div class="player"><div class="avatar"><img src="hakim.png" alt="Hakim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">05</div><div class="ign">Super Braderr</div><div class="role">Roamer</div></div>
+        <div class="player"><div class="avatar"><img src="faiz.png" alt="Faiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">F</div></div><div class="num">SUB</div><div class="ign">MataKilau</div><div class="role">Exp Laner</div></div>
       </div>
     </div>
 
     <div class="roster-panel" id="efootball">
       <div class="roster-list">
-        <div class="player"><div class="avatar"><img src="faiz.png" alt="Faiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">F</div></div><div class="num">01</div><div class="name">Faiz</div><div class="ign">MataKilau</div><div class="role">Long Ball Counter · Capello</div></div>
-        <div class="player"><div class="avatar"><img src="hakim.png" alt="Hakim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">02</div><div class="name">Hakim</div><div class="ign">MataKilat</div><div class="role">Long Ball Counter · Franz Beckenbauer</div></div>
-        <div class="player"><div class="avatar"><img src="haziq.png" alt="Haziq" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">03</div><div class="name">Haziq</div><div class="ign">SuperZiqx</div><div class="role">Quick Counter · Xabi Alonso</div></div>
-        <div class="player"><div class="avatar"><img src="waez.png" alt="Waez" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">W</div></div><div class="num">04</div><div class="name">Waez</div><div class="ign">matakelipot</div><div class="role">Long Ball · Mourinho</div></div>
-        <div class="player"><div class="avatar"><img src="muiz.png" alt="Muiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">05</div><div class="name">Muiz</div><div class="ign">Mussed</div><div class="role">Long Ball Counter · Arteta</div></div>
-        <div class="player"><div class="avatar"><img src="muaz.png" alt="Muaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">06</div><div class="name">Muaz</div><div class="ign">TBA</div><div class="role">TBA</div></div>
+        <div class="player"><div class="avatar"><img src="faiz.png" alt="Faiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">F</div></div><div class="num">01</div><div class="ign">MataKilau</div><div class="role">Long Ball Counter · Capello</div></div>
+        <div class="player"><div class="avatar"><img src="hakim.png" alt="Hakim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">02</div><div class="ign">MataKilat</div><div class="role">Long Ball Counter · Franz Beckenbauer</div></div>
+        <div class="player"><div class="avatar"><img src="haziq.png" alt="Haziq" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">H</div></div><div class="num">03</div><div class="ign">SuperZiqx</div><div class="role">Quick Counter · Xabi Alonso</div></div>
+        <div class="player"><div class="avatar"><img src="waez.png" alt="Waez" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">W</div></div><div class="num">04</div><div class="ign">matakelipot</div><div class="role">Long Ball · Mourinho</div></div>
+        <div class="player"><div class="avatar"><img src="muiz.png" alt="Muiz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">05</div><div class="ign">Mussed</div><div class="role">Long Ball Counter · Arteta</div></div>
+        <div class="player"><div class="avatar"><img src="muaz.png" alt="Muaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="fallback">M</div></div><div class="num">06</div><div class="ign">TBA</div><div class="role">TBA</div></div>
       </div>
     </div>
   </div>
